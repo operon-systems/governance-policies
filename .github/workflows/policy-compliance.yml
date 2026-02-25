@@ -1,0 +1,19 @@
+name: policy-compliance
+
+on:
+  workflow_call:
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate required structure
+        run: |
+          echo "Checking required files..."
+
+          test -f README.md || (echo "README.md missing" && exit 1)
+          test -d .github/workflows || (echo ".github/workflows missing" && exit 1)
+
+          echo "Structure validation passed."
